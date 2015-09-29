@@ -3,7 +3,7 @@ ActionMailer::Base.smtp_settings = {
   address:           'smtp.mailgun.org',
   user_name:         ENV['MAILGUN_SMTP_LOGIN'],
   password:          ENV['MAILGUN_SMTP_PASSWORD'],
-  domain:            'app94086510ef2746d7b3b11bb2f56b98af.mailgun.org',
+  domain:            'popsmoke-blocmarks.herokuapp.com',
   authentication:    :plain,
   content_type:      'text/html'
 }
