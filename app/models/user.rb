@@ -5,4 +5,18 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   has_many :topics
+
+  validates :name, presence: true
+
+  def admin?
+    role == 'admin'
+  end
+
+  def moderator?
+    role == 'moderator'
+  end
+
+  def member?
+    role == 'member'
+  end
 end

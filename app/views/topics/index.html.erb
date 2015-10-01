@@ -1,0 +1,68 @@
+<div class="row landing-top">
+  <h1 class="text-center lato-dark">All BlocMarks</h1>
+  <div class="text-center">
+    <% if policy(Topic.new).create? %>
+      <button type="button" class="btn button-3d" data-toggle="modal" data-target="#new">
+        <span class="glyphicon glyphicon-plus"></span>
+        New Topic
+      </button>
+    <% else %>
+      <button type="button" class="btn button-3d" data-toggle="modal" data-target="#notSignedIn">
+        New Topic
+      </button>
+    <% end %>
+    <br>
+    <br>
+    <i><span class="glyphicon glyphicon-info-sign"></span>click a topic title indicated by a <span class="glyphicon glyphicon-tags"></span> to access bookmark creation options.</i>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="js-topics">
+          <%= render partial: 'topics/topic', collection: @topics %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- New Topic Modal -->
+<div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title lato-normal black" id="new">
+          <span class="glyphicon glyphicon-plus"></span>
+          New Topic
+        </h4>
+      </div>
+        <div class="modal-body">
+          <div class="new-topic">
+            <%= render partial: 'topics/new', locals: { topic: Topic.new } %>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<!--New Topic(not signed in) Modal -->
+<div class="modal fade text-center" id="notSignedIn" tabindex="-1" role="dialog" aria-labelledby="notSignedIn" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Oops!</h4>
+      </div>
+      <div class="modal-body">
+        <p class="lead">You must be signed in to create a new bookmark!</p>
+      </div>
+      <div class="modal-footer">
+        <div class="text-center">
+          <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-info btn-md' %>
+          <%= link_to "Sign In", new_user_session_path, class: 'btn btn-primary btn-md' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

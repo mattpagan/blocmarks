@@ -1,0 +1,9 @@
+<% if !@topic.blank? %>
+  <% if @topic.valid? %>
+    $('.js-topics').prepend("<%= escape_javascript(render(@topic)) %>");
+    $('.new-topic').html("<%= escape_javascript(render partial: 'topics/new', locals: { topic: @new_topic }) %>");
+    $('#new').modal('hide');
+  <% else %>
+    $('.new-topic').html("<%= escape_javascript(render partial: 'topics/new', locals: { topic: @topic }) %>");
+  <% end %>
+<% end %>

@@ -1,0 +1,94 @@
+
+<div class="row landing-top">
+  <h1 class="lato-dark text-center"><%= topic_hash %></h1>
+  <div class="col-md-2 text-center">
+    <%= link_to topics_path, class: 'btn btn-default btn-sm' do %>
+        <span class="glyphicon glyphicon-circle-arrow-left black list-inline"></span>
+        <h5 class="list-inline lato-dark">Back to Topics</h5>
+    <% end %>
+  </div>
+  <div class="col-md-8">
+    <div class="js-bookmarks">
+      <%= render partial: 'bookmarks/bookmark', collection: @bookmarks %>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="text-center">
+      <% if policy(@topic).update? %>
+      <!-- Button trigger modal -->
+        <button type="button" class="btn button-3d-edit" data-toggle="modal" data-target="#edit">
+          <span class="glyphicon glyphicon-pencil"></span>
+          Edit Topic
+        </button>
+      <% end %>
+      
+      <% if policy(@bookmarks).create? %>
+      <!-- Button trigger modal -->
+        <button type="button" class="btn button-3d" data-toggle="modal" data-target="#new-bookmark">
+          <span class="glyphicon glyphicon-plus"></span>
+          New Bookmark
+        </button>
+      <% else %>
+        <button type="button" class="btn button-3d" data-toggle="modal" data-target="#notSignedIn">
+          <span class="glyphicon glyphicon-plus"></span>
+          New Bookmark
+        </button>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- New Bookmark Modal -->
+<div class="modal fade" id="new-bookmark" tabindex="-1" role="dialog" aria-labelledby="new-bookmark" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title lato-dark" id="myModalLabel">New Bookmark</h4>
+      </div>
+      <div class="modal-body">
+        <div class="new-bookmark">
+          <%= render partial: 'bookmarks/form' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Edit Bookmark Modal -->
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title lato-dark" id="myModalLabel">Edit Topic</h4>
+      </div>
+      <div class="modal-body">
+        <%= render 'edit' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--New Topic(not signed in) Modal -->
+<div class="modal fade text-center" id="notSignedIn" tabindex="-1" role="dialog" aria-labelledby="notSignedIn" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Oops!</h4>
+      </div>
+      <div class="modal-body">
+        <p class="lead">You must be signed in to create a new topic!</p>
+      </div>
+      <div class="modal-footer">
+        <div class="text-center">
+          <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-info btn-md' %>
+          <%= link_to "Sign In", new_user_session_path, class: 'btn btn-primary btn-md' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
