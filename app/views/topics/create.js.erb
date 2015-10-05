@@ -1,3 +1,5 @@
+console.log("hello world");
+console.log(<% @topic %>);
 <% if !@topic.blank? %>
   <% if @topic.valid? %>
     $('.js-topics').prepend("<%= escape_javascript(render(@topic)) %>");

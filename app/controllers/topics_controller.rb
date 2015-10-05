@@ -7,6 +7,8 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
+    @bookmarks = @topic.bookmarks
+    @bookmark = @bookmarks.new
   end
 
   def new
@@ -15,7 +17,7 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(topic_params)
-
+    @new_topic = Topic.new
     authorize @topic
     if @topic.save
       flash[:notice] = "Topic was created successfully."

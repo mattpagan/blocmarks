@@ -23,6 +23,16 @@ users= User.all
 end
 topics = Topic.all
 
+50.times do
+  bookmark = Bookmark.create!(
+    user:  users.sample,
+    topic: topics.sample,
+    url:   Faker::Internet.url
+  )
+  bookmark.save!
+end
+bookmarks = Bookmark.all
+
 admin = User.new(
   name: 'Matt Pagan',
   email: 'matthew.pagan@me.com',
@@ -36,3 +46,4 @@ admin.update_attribute(:role, 'admin')
 puts "Seeding Finished"
 puts "#{User.count} users created."
 puts "#{Topic.count} topics created."
+puts "#{Bookmark.count} bookmarks created."

@@ -1,16 +1,19 @@
+<h1 class="lato-dark text-center"><%= topic_hash %></h1>
 
-<div class="row landing-top">
-  <h1 class="lato-dark text-center"><%= topic_hash %></h1>
-  <div class="col-md-2 text-center">
+<div class="row">
+  <div class="col-md-2">
     <%= link_to topics_path, class: 'btn btn-default btn-sm' do %>
-        <span class="glyphicon glyphicon-circle-arrow-left black list-inline"></span>
-        <h5 class="list-inline lato-dark">Back to Topics</h5>
+        <span class="glyphicon glyphicon-circle-arrow-left black inliner"></span>
+        <h5 class="inliner lato-dark">Back to Topics</h5>
     <% end %>
   </div>
   <div class="col-md-8">
-    <div class="js-bookmarks">
-      <%= render partial: 'bookmarks/bookmark', collection: @bookmarks %>
-    </div>
+    <% @bookmarks.each do |bookmark| %>
+      <p class="lead"><%= link_to "#{bookmark.url}", topic_bookmark_path(@topic, @topic.bookmarks) %></p>
+      <% unless bookmark.url == nil %>
+        <hr />
+      <% end %>
+    <% end %>
   </div>
   <div class="col-md-2">
     <div class="text-center">
@@ -21,15 +24,15 @@
           Edit Topic
         </button>
       <% end %>
-      
+      <% if policy(@topic).destroy? %>
+        <%=link_to @topic, method: :delete, class: 'btn button-3d-delete', data: { confirm: 'Are you sure you want to delete this topic?' } do %>
+          <span class="glyphicon glyphicon-remove"></span>
+          Delete Topic
+        <% end %>
+      <% end %>
       <% if policy(@bookmarks).create? %>
       <!-- Button trigger modal -->
-        <button type="button" class="btn button-3d" data-toggle="modal" data-target="#new-bookmark">
-          <span class="glyphicon glyphicon-plus"></span>
-          New Bookmark
-        </button>
-      <% else %>
-        <button type="button" class="btn button-3d" data-toggle="modal" data-target="#notSignedIn">
+        <button type="button" class="button-3d" data-toggle="modal" data-target="#new-bookmark">
           <span class="glyphicon glyphicon-plus"></span>
           New Bookmark
         </button>
@@ -38,7 +41,7 @@
   </div>
 </div>
 
-<!-- New Bookmark Modal -->
+<!-- Modal -->
 <div class="modal fade" id="new-bookmark" tabindex="-1" role="dialog" aria-labelledby="new-bookmark" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -47,17 +50,13 @@
         <h4 class="modal-title lato-dark" id="myModalLabel">New Bookmark</h4>
       </div>
       <div class="modal-body">
-        <div class="new-bookmark">
-          <%= render partial: 'bookmarks/form' %>
-        </div>
+        <%= render 'bookmarks/form' %>
       </div>
     </div>
   </div>
 </div>
 
-
-
-<!-- Edit Bookmark Modal -->
+<!-- Modal -->
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -67,27 +66,6 @@
       </div>
       <div class="modal-body">
         <%= render 'edit' %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--New Topic(not signed in) Modal -->
-<div class="modal fade text-center" id="notSignedIn" tabindex="-1" role="dialog" aria-labelledby="notSignedIn" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Oops!</h4>
-      </div>
-      <div class="modal-body">
-        <p class="lead">You must be signed in to create a new topic!</p>
-      </div>
-      <div class="modal-footer">
-        <div class="text-center">
-          <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-info btn-md' %>
-          <%= link_to "Sign In", new_user_session_path, class: 'btn btn-primary btn-md' %>
-        </div>
       </div>
     </div>
   </div>

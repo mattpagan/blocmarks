@@ -1,0 +1,8 @@
+console.log('hello world')
+$('#new-bookmark').modal('hide');
+<% if @bookmark.valid? %>
+  $('#new-bookmark').modal('hide');
+  $('.js-bookmarks').append("<%= escape_javascript(render(@bookmark)) %>");
+<% else %>
+  $('.new-bookmark').html("<%= escape_javascript(render partial: 'bookmarks/form') %>");
+<% end %>
