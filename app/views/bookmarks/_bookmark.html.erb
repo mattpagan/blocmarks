@@ -1,6 +1,10 @@
 <%= link_to topic_bookmark_path(@topic, bookmark) do%>
   <div class="text-center inliner padder">
-    <%= image_tag(bookmark.image.thumb.url, class: 'bookmark-image') if bookmark.image? %>
+    <% if bookmark.image.thumb.url != nil %>
+      <%= image_tag(bookmark.image.thumb.url, class: 'bookmark-image') %>
+    <% else %>
+      <%= image_tag(bookmark.image, class: 'bookmark-image') %>
+    <% end %>
     <p class="lead"><%= bookmark.url %></p>
   </div>
 <% end %>

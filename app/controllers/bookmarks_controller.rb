@@ -40,7 +40,7 @@ class BookmarksController < ApplicationController
       flash[:notice] = "Your bookmark was updated successfully."
       redirect_to [@topic, @bookmark]
     else
-      flash[:error] = "Sorry. There was an error saving your bookmark :(. Please try again."
+      flash[:error] = "Sorry. There was an error saving your bookmark. Please try again."
       render :edit
     end
   end

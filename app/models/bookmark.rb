@@ -13,8 +13,12 @@
 
 class Bookmark < ActiveRecord::Base
   mount_uploader :image, BookmarksUploader
+
+  has_many :likes, dependent: :destroy
+
   belongs_to :topic
   belongs_to :user
 
   validates :url, presence: true
+  validates :title, length: { in: 5..50}
 end

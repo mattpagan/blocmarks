@@ -1,13 +1,13 @@
+<div class="row landing-top">
 <h1 class="lato-dark text-center"><%= topic_hash %></h1>
-
-<div class="row">
-  <div class="col-md-2">
+  <div class="col-md-2 text-center">
     <%= link_to topics_path, class: 'btn btn-default btn-sm' do %>
         <span class="glyphicon glyphicon-circle-arrow-left black inliner"></span>
         <h5 class="inliner lato-dark">Back to Topics</h5>
     <% end %>
   </div>
   <div class="col-md-8">
+    <div class="js-bookmarks">
     <%= render partial: 'bookmarks/bookmark', collection: @bookmarks %>
   </div>
   <div class="col-md-2">
@@ -38,14 +38,16 @@
 
 <!-- Modal -->
 <div class="modal fade" id="new-bookmark" tabindex="-1" role="dialog" aria-labelledby="new-bookmark" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title lato-dark" id="myModalLabel">New Bookmark</h4>
-      </div>
-      <div class="modal-body">
-        <%= render 'bookmarks/form' %>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title lato-dark" id="myModalLabel">New Bookmark</h4>
+        </div>
+        <div class="modal-body">
+          <div class="new-bookmark">
+          <%= render partial: 'bookmarks/form' %>
+        </div>
       </div>
     </div>
   </div>

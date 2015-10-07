@@ -10,6 +10,7 @@ class TopicsController < ApplicationController
     @bookmarks = @topic.bookmarks
     @bookmark = Bookmark.new
     @new_bookmark = Bookmark.new
+    authorize @topic
   end
 
   def new

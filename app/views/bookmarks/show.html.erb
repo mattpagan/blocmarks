@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row landing-top">
   <div class="col-md-2">
     <div class="text-right">
       <%= link_to @bookmark.topic, class: 'btn btn-default btn-lg back-button-margins' do %>
@@ -7,28 +7,46 @@
       <% end %>
     </div>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-8 background-helper">
+    <h1 class="lato-normal black text-center"><%= @bookmark.title %></h1>
+    <h3 class="lato black text-center">Marked by: <%= link_to @bookmark.user.name, user_path(@bookmark.user), class: 'inliner' %><%= link_to image_tag(@bookmark.user.avatar.url(:profile), class: 'img-circle small-avatar') %></h3>
+
     <div class="text-center">
-      <%= image_tag(@bookmark.image, class: 'bookmark-image-show') %>
+      <%= image_tag(@bookmark.image.url(:thumb), class: 'bookmark-image-show') %>
     </div>
-    <h1 class="lato-dark text-center"><%= @bookmark.url %></h1>
+    <hr>
+    
     <div class="text-center">
-      <% if policy(@bookmark).update? %>
-      <!-- Button trigger modal -->
-        <button type="button" class="btn button-3d-edit" data-toggle="modal" data-target="#edit">
-          <span class="glyphicon glyphicon-pencil"></span>
-          Edit Bookmark
-        </button>
+
+    </div>
+
+    <h6 class="lato-normal black text-center"><%= time_ago_in_words(@bookmark.created_at) %> ago</h6>
+    <div class="text-center">
+      <%= link_to @bookmark.url, class: 'btn btn-default like-button inliner' do %>
+        <span class="glyphicon glyphicon-globe"></span>
       <% end %>
-      <% if policy(@bookmark).destroy? %>
-        <%=link_to topic_bookmark_path(@topic, @bookmark), method: :delete, class: 'btn button-3d-delete', data: { confirm: 'Are you sure you want to delete this topic?' } do %>
-          <span class="glyphicon glyphicon-remove"></span>
-          Delete Bookmark
-        <% end %>
+      <div class="js-likes inliner">
+        <%= render partial: 'likes/like', locals: { bookmark: @bookmark }%>
+      </div>
+      <%= link_to bookmark_path(@bookmark), class: 'btn btn-default like-button inliner' do %>
+        <span class="glyphicon glyphicon-sunglasses"></span>
       <% end %>
     </div>
   </div>
   <div class="col-md-2">
+    <% if policy(@bookmark).update? %>
+    <!-- Button trigger modal -->
+      <button type="button" class="btn button-3d-edit back-button-margins" data-toggle="modal" data-target="#edit">
+        <span class="glyphicon glyphicon-pencil"></span>
+        Edit Bookmark
+      </button>
+    <% end %>
+    <% if policy(@bookmark).destroy? %>
+      <%=link_to topic_bookmark_path(@topic, @bookmark), method: :delete, class: 'btn button-3d-delete', data: { confirm: 'Are you sure you want to delete this topic?' } do %>
+        <span class="glyphicon glyphicon-remove"></span>
+        Delete Bookmark
+      <% end %>
+    <% end %>
   </div>
 </div>
 
@@ -38,7 +56,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title lato-dark" id="myModalLabel">Edit Your Bookmark</h4>
+          <h4 class="modal-title lato-dark" id="myModalLabel">Edit Bookmark</h4>
         </div>
         <div class="modal-body">
           <%= render partial: 'bookmarks/form', locals: { bookmark: @bookmark } %>

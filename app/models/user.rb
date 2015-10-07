@@ -29,8 +29,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  has_many :topics
-  has_many :bookmarks
+  has_many :topics, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  has_many :likes, dependent: :destroy
+
+  mount_uploader :avatar, AvatarUploader
 
   validates :name, presence: true
 
@@ -45,4 +48,8 @@ class User < ActiveRecord::Base
   def member?
     role == 'member'
   end
+
+  def liked(bookmark)
+     likes.where(bookmark_id: bookmark.id).first
+   end
 end

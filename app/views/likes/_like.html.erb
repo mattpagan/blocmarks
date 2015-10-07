@@ -1,0 +1,15 @@
+<%= content_tag :div, id: "bookmark-#{bookmark.id}" do %>
+  <% if current_user %>
+    <% if like = current_user.liked(bookmark) %>
+      <%= link_to [bookmark, like], class: 'btn btn-default like-button-liked', method: :delete, remote: true do %>
+        <i class="glyphicon glyphicon-heart"></i>
+        <small class="pull-right pad-bot"><%= bookmark.likes.count %></small>
+      <% end %>
+    <% else %>
+      <%= link_to [bookmark, Like.new], class: 'btn btn-default like-button', method: :post, remote: true do %>
+        <i class="glyphicon glyphicon-heart"></i>
+        <small class='pull-right pad-bot'><%= bookmark.likes.count %></small>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
