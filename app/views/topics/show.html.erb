@@ -8,12 +8,7 @@
     <% end %>
   </div>
   <div class="col-md-8">
-    <% @bookmarks.each do |bookmark| %>
-      <p class="lead"><%= link_to "#{bookmark.url}", topic_bookmark_path(@topic, @topic.bookmarks) %></p>
-      <% unless bookmark.url == nil %>
-        <hr />
-      <% end %>
-    <% end %>
+    <%= render partial: 'bookmarks/bookmark', collection: @bookmarks %>
   </div>
   <div class="col-md-2">
     <div class="text-center">

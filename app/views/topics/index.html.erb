@@ -9,25 +9,10 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-md-2">
-
-    </div>
-    <div class="col-md-8">
-      <% @topics.each do |topic| %>
-        <div class="media">
-          <div class="media-body">
-            <h3 class="media-heading lato-normal hidden-xs">
-              <%= link_to topic.title, topic, class: 'inliner' %>
-            </h3>
-            <h4 class="media-heading lato-normal visible-xs">
-              <%= link_to topic.title, topic %>
-            </h4>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    <div class="col-md-2">
-
+     <div class="col-md-12">
+      <div class="js-topics">
+        <%= render partial: 'topics/topic', collection: @topics %>
+      </div>
     </div>
   </div>
 </div>
@@ -40,7 +25,7 @@
         <h4 class="modal-title lato-dark" id="myModalLabel">Edit Topic</h4>
       </div>
       <div class="modal-body">
-        <%= render 'new' %>
+        <%= render partial: 'new', locals: {topic: @topic} %>
       </div>
 
     </div>
