@@ -20,5 +20,5 @@ class Bookmark < ActiveRecord::Base
   belongs_to :user
 
   validates :url, presence: true
-  validates :title, length: { in: 5..50}
+  # validates :title, length: { in: 5..50}
 end
