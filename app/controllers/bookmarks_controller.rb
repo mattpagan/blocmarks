@@ -60,6 +60,6 @@ class BookmarksController < ApplicationController
   private
 
   def bookmark_params
-    params.require(:bookmark).permit(:url, :image, :image_cache)
+    params.require(:bookmark).permit(:title, :url, :image, :image_cache)
   end
 end

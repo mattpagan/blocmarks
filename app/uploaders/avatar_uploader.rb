@@ -25,7 +25,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
    end
 
    # Process files as they are uploaded:
-   process :resize_to_fill => [300, 300]
+   process :resize_to_fill => [200, 200]
 
   version :tiny do
     process resize_to_fill: [25, 25]
@@ -36,7 +36,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   version :profile do
-    process resize_to_fill: [250, 250]
+    process resize_to_fill: [200, 200]
   end
   
   # def scale(width, height)
