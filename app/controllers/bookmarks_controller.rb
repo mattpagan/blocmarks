@@ -1,4 +1,6 @@
 class BookmarksController < ApplicationController
+
+  skip_before_action :verify_authenticity_token
   
   def show
     @bookmark = Bookmark.find(params[:id])
@@ -13,7 +15,7 @@ class BookmarksController < ApplicationController
   def create
     @topic = Topic.find(params[:topic_id])
     @user = current_user
-    @bookmark = @topic.bookmarks.new(bookmark_params)
+    @bookmark = @topic.bookmarks.build(bookmark_params)
     @bookmark.topic = @topic
     @bookmark.user = @user
     if @bookmark.save

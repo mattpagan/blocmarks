@@ -9,6 +9,7 @@
 #  updated_at :datetime         not null
 #  user_id    :integer
 #  image      :string
+#  title      :string
 #
 
 class Bookmark < ActiveRecord::Base
