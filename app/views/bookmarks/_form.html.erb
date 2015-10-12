@@ -1,0 +1,29 @@
+<%= form_for [@topic, @bookmark] do |f| %>
+<% if @bookmark.errors.any? %>
+  <div class="alert alert-danger">
+    <h4> There are <%= pluralize(@bookmark.errors.count, "error") %>.</h4>
+    <ul>
+      <% @bookmark.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+<% end %>
+  <%= form_group_tag(@bookmark.errors[:url]) do %>
+    <%= f.label :url %>
+    <%= f.text_field :url, class: 'form-control', placeholder: "Enter post title" %>
+  <% end %>
+  <% if @bookmark.image? %>
+    <div class="form-group">
+      <p>Current Bookmark Image</p>
+      <%= image_tag(@bookmark.image.small.url) %>
+    </div>
+  <% end %>
+  <%= form_group_tag(@bookmark.errors[:image]) do %>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+    <%= f.hidden_field :image_cache %>
+  <% end %>
+  <div class="form-group text-center">
+    <%= f.submit "Save Bookmark", class: 'btn btn-primary' %>
+  </div>
+<% end %>

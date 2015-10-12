@@ -19,20 +19,24 @@ class BookmarksUploader < CarrierWave::Uploader::Base
   # Provide a default URL as a default if there hasn't been a file uploaded:
    def default_url
       # For Rails 3.1+ asset pipeline compatibility:
-      ActionController::Base.helpers.asset_path("fallback/" + [thumb, "default.gif"].compact.join('_'))
+      ActionController::Base.helpers.asset_path("fallback/" + [thumb, "default.png"].compact.join('_'))
   
       #"/images/fallback/" + [version_name, "default.png"].compact.join('_')
    end
 
   # Process files as they are uploaded:
    process :resize_to_fill => [200, 300]
+
+   version :small do
+     process resize_to_fill: [50, 50]
+   end
  
    version :thumb do
-     process resize_to_fill: [150, 150]
+     process resize_to_fill: [100, 100]
    end
 
    version :profile do
-     process resize_to_fill: [300, 300]
+     process resize_to_fill: [250, 250]
    end
 
   # Add a white list of extensions which are allowed to be uploaded.
