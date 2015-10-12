@@ -1,19 +1,90 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-2">
+    <div class="text-center backgroundish">
+      <%= image_tag(@user.avatar.profile.url, class: 'img-circle profile-image') %>
+      <h1 class="no-top"><%= @user.name %></h1>
+      <br>
+      <ul class="nav nav-stacked" role="tablist">
+        <li role="presentation" class="active"><a class="lato-normal sep sep-top black" href="#home" aria-controls="home" role="tab" data-toggle="tab">Topics</a></li>
+        <li role="presentation"><a class="lato-normal sep black" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Bookmarks</a></li>
+        <% unless @user != current_user %>
+          <li role="presentation">
+            <%= link_to edit_user_registration_path(current_user) do %>
+              <span class="glyphicon glyphicon-cog"></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <div role="tabpanel">
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+      <!-- Nav tabs -->
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Login:</strong>
-  <%= @user.login %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane tab-panel active" id="home">
+          <h3 class="text-center"><%= @user.name %>'s Topics</h3>
+          <% @user_topics.each do |topic| %>
+            <div class="auto-margins">
+              <%= link_to topic_path(topic), class: 'lato-normal black' do %>
+                <h2 class="inliner"><%= topic.title %></h2>
+                <h4 class="inliner"><span class="glyphicon glyphicon-tags"></span></h4>
+              <% end %>
+              <br>
+              <% topic.bookmarks.each do |bookmark| %>
+                <div class="inliner auto-margins">
+                  <div class="thumbnail text-center left-margin">
+                    <%= link_to image_tag(bookmark.image.url(:thumb), class: 'bm-image-padded'), bookmark_path(bookmark) %>
+                    <div class="caption">
+                      <h5 class="lato-normal black"><%= bookmark.title %></h5>
+                      <small class="lato-normal black">Marked By: <%= link_to bookmark.user.name, user_path(bookmark.user) %></small>
+                      <br>
+                      <hr>
+                      <%= link_to bookmark.url, class: 'btn btn-default like-button inliner' do %>
+                        <span class="glyphicon glyphicon-globe"></span>
+                      <% end %>
+                      <div class="js-likes inliner">
+                        <%= render partial: 'likes/like', locals: { bookmark: bookmark }%>
+                      </div>
+                      <%= link_to bookmark_path(bookmark), class: 'btn btn-default like-button inliner' do %>
+                        <span class="glyphicon glyphicon-sunglasses"></span>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="profile">
+          <h3 class="text-center"><%= @user.name %>'s Bookmarks</h3>
+          <% @user_bookmarks.each do |bookmark| %>
+            <div class="inliner auto-margins">
+              <div class="thumbnail text-center left-margin">
+                <%= link_to image_tag(bookmark.image.url(:thumb), class: 'bm-image-padded'), bookmark_path(bookmark) %>
+                <div class="caption">
+                  <h5 class="lato-normal black"><%= bookmark.title %></h5>
+                  <small class="lato-normal black">Marked By: <%= link_to bookmark.user.name, user_path(bookmark.user) %></small>
+                  <br>
+                  <hr>
+                  <%= link_to bookmark.url, class: 'btn btn-default like-button inliner' do %>
+                    <span class="glyphicon glyphicon-globe"></span>
+                  <% end %>
+                  <div class="js-likes inliner">
+                    <%= render partial: 'likes/like', locals: { bookmark: bookmark }%>
+                  </div>
+                  <%= link_to bookmark_path(bookmark), class: 'btn btn-default like-button inliner' do %>
+                    <span class="glyphicon glyphicon-sunglasses"></span>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="settings">...</div>
+      </div>
+    </div>
+  </div>
+</div>
