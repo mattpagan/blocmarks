@@ -24,10 +24,10 @@ class BookmarksController < ApplicationController
       puts 'bookmark save error'
     end
 
-	respond_to do |format|
-	   format.html
-	   format.js
-	 end
+  	respond_to do |format|
+  	   format.html
+  	   format.js
+  	end
   end
 
   def edit
