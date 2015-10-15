@@ -1,3 +1,65 @@
 // Place all the styles related to the Topics controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.thumbnail {
+  width: 220px;
+  height: 340px;
+  background-color: #464646 !important;
+}
+
+.over-catch {
+  width: 175px;
+  height: 30px;
+  overflow: scroll;
+}
+
+.auto-margins {
+  margin-left: 0 auto;
+}
+
+.add-topic {
+  margin-top: 5px;
+}
+
+.left-margin {
+  margin-left: 10px;
+}
+
+.topic-ul {
+  text-decoration: underline;
+}
+
+.edit-button {
+  width: 106px;
+}
+
+.form-push-right {
+  position: relative;
+  right: 3px;
+}
+
+.padder {
+  padding: 8px 5px;
+}
+
+.bookmark-image {
+  border-radius: 25px;
+}
+
+.bookmark-well {
+  border: groove 1px #888;
+  background-color:rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.bm-image-padded {
+  border-radius: 25px;
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+}
+
+.bm-link-padded {
+  padding-left: 10px;
+}
