@@ -4,5 +4,6 @@ $('#new-bookmark').modal('hide');
   $('#new-bookmark').modal('hide');
   $('.js-bookmarks').append("<%= escape_javascript(render(@bookmark)) %>");
 <% else %>
+console.log("landed in invalid");
   $('.new-bookmark').html("<%= escape_javascript(render partial: 'bookmarks/form') %>");
 <% end %>
